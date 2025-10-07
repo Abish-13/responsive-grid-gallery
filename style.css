@@ -1,0 +1,83 @@
+/* --- Basic Setup & Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* --- Header Styling --- */
+.main-header {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff;
+    margin-bottom: 2rem;
+}
+
+.main-header p {
+    color: #666;
+}
+
+/* --- Core Grid Layout --- */
+.gallery-grid {
+    display: grid;
+    /* This is the key to the responsive grid.
+       - 'repeat(auto-fit, ...)' tells the grid to fit as many columns as it can.
+       - 'minmax(300px, 1fr)' tells each column to be at least 300px wide,
+         but can grow to fill the available space (1fr).
+       When the screen is too narrow for a 300px column, it automatically wraps.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+/* --- Grid Item Styling --- */
+.grid-item {
+    position: relative; /* Needed for the overlay positioning */
+    overflow: hidden; /* Hides parts of the image that might overflow on zoom */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container without distortion */
+    display: block; /* Removes any extra space below the image */
+    transition: transform 0.4s ease-out; /* Smooth zoom effect on hover */
+}
+
+/* --- Interactive Overlay Effect --- */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    /* Use Flexbox to perfectly center the text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.4s ease-out; /* Smooth fade-in effect */
+}
+
+/* --- Hover Effects --- */
+.grid-item:hover .overlay {
+    opacity: 1; /* Show the overlay on hover */
+}
+
+.grid-item:hover img {
+    transform: scale(1.1); /* Zoom in on the image on hover */
+}
